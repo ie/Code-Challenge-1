@@ -27,7 +27,7 @@ REPORT
 
 - PLACE will put the Pacman on the grid in positon X,Y and facing NORTH,SOUTH, EAST or WEST.
 - The origin (0,0) can be considered to be the SOUTH WEST most corner.
-- The first valid command to Pacman is a PLACE command, aXer that, any sequence of commands may be issued, in any order, including another PLACE command. The applicaton should discard all commands in the sequence untl a valid PLACE command has been executed.
+- The first valid command to Pacman is a PLACE command, after that, any sequence of commands may be issued, in any order, including another PLACE command. The applicaton should discard all commands in the sequence until a valid PLACE command has been executed.
 - MOVE will move Pacman one unit forward in the directon it is currently facing.
 - LEFT and RIGHT will rotate Pacman 90 degrees in the specified directon without changing the position of Pacman.
 - REPORT will announce the X,Y and F of Pacman. This can be in any form, but standard output is sufficient.
