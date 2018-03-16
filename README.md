@@ -81,6 +81,11 @@ Output: 3,3,NORTH
 ```
 
 **Deliverables:**
+- Spend as little or as much time as you like on the challenge.
+- *It is not required to provide any graphical output* showing the movement of Pacman.
+- The output of the efforts should be committed back into a Public Repo in Github and the URL shared back for review.
+- Proving your code works via unit testing is highly encouraged
 
-The source files, the test data and any test code.
-It is not required to provide any graphical output showing the movement of Pacman.
+
+
+
