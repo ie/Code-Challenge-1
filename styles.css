@@ -1,0 +1,43 @@
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+/* div {
+  display: inline-block;
+} */
+.up {
+  transform: rotate(-90deg);
+}
+.down {
+  transform: rotate(90deg);
+}
+.left {
+  transform: rotate(180deg)
+}
+.right {
+  transform: rotate(0)
+}
+td {
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 30px;
+}
+table{
+  border-collapse: collapse;
+}
+.table {
+  border: 1px solid black;
+  display: inline-block;
+}
+input:not([type=number]) {
+  padding: 0 10px;
+  height: 25px;
+  margin: 10px 5px;
+}
+[type=number] {
+  width: 50px;
+}

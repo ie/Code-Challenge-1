@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="table">
+  <table >
+    <tr><td id="40"></td><td id="41"></td><td id="42"></td><td id="43"></td><td id="44"></td></tr>
+    <tr><td id="30"></td><td id="31"></td><td id="32"></td><td id="33"></td><td id="34"></td></tr>
+    <tr><td id="20"></td><td id="21"></td><td id="22"></td><td id="23"></td><td id="24"></td></tr>
+    <tr><td id="10"></td><td id="11"></td><td id="12"></td><td id="13"></td><td id="14"></td></tr>
+    <tr><td id="00"></td><td id="01"></td><td id="02"></td><td id="03"></td><td id="04"></td></tr>
+  </table>
+</div>
+<div class="controls" id="controls">
+  X:
+  <input type="number" id="x" min="0" max="4" value="0">
+  Y:
+  <input type="number" id="y" min="0" max="4" value="0">
+  Face:
+  <select id="face">
+    <option value="right">right</option>
+    <option value="down">down</option>
+    <option value="left">left</option>
+    <option value="up">up</option>
+  </select>
+  <input type="button" value="place pacman">
+  <br>
+  <input type="button" value="move" >
+  <input type="button" value="right" >
+  <input type="button" value="left" >
+  <input type="button" value="report" >
+  <br>
+  <hr>
+  commande line:
+  <input type="text" id="command">
+  <br><br>
+  <div class="report">
+
+  </div>
+</div>
+<script src="./pacman.js"></script>
+</body>
+</html>
