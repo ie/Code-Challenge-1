@@ -43,7 +43,6 @@ export const executeCommands = (commands: string[][]) => {
     }
     switch(command[0].toUpperCase()) {
       case COMMAND_TYPES.PLACE:
-          //place util
           if (command.length > 1) {
             const placePosition = command[1].split(',')
             if (placePosition.length === 3) {
@@ -57,8 +56,13 @@ export const executeCommands = (commands: string[][]) => {
       case COMMAND_TYPES.MOVE:
         //move util
         break;
-      case COMMAND_TYPES.LEFT || COMMAND_TYPES.RIGHT:
+      case COMMAND_TYPES.LEFT:
+      case COMMAND_TYPES.RIGHT:
         //rotate
+        if (pacPosition?.direction !== undefined) {
+          const newDirection = rotatePac(command[0], pacPosition.direction)
+          pacPosition = {...pacPosition, direction: newDirection}
+        }
         break;
       case COMMAND_TYPES.REPORT:
         if (pacPosition !== undefined) {
@@ -94,8 +98,8 @@ const placePac = (command: string[]): IPacPosition | undefined => {
   }
 
   const convertDirToDegree = (direction: string): number | undefined => {
-    if (['NORTH', 'SOUTH', 'EAST', 'WEST'].includes(command[2])) {
-      return DirectionDegrees[command[2].toUpperCase()]
+    if (['NORTH', 'SOUTH', 'EAST', 'WEST'].includes(direction.toUpperCase())) {
+      return DirectionDegrees[direction.toUpperCase()]
     }
     isValidPos = false
     return undefined
@@ -106,4 +110,24 @@ const placePac = (command: string[]): IPacPosition | undefined => {
   const direction = convertDirToDegree(command[2])
 
   return isValidPos ? {xPos: x, yPos: y, direction: direction} as IPacPosition : undefined
+}
+
+const rotatePac = (rotationCommand: string, currentDirection: number): number => {
+  let newDirection = currentDirection
+  if (rotationCommand.toUpperCase() === 'RIGHT') {
+      // North is represented by 0 and 360
+      if (currentDirection >= 270) {
+        newDirection = 0
+      } else {
+        newDirection += 90
+      }
+  }
+  if (rotationCommand.toUpperCase() === 'LEFT') {
+    if (currentDirection === 0) {
+      newDirection = 270
+    } else {
+      newDirection -= 90
+    }
+}
+  return newDirection
 }
