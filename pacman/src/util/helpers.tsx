@@ -1,6 +1,6 @@
 /**
  * fetches commands txt file, splits it by line and returns an array of commands
- * @return {any} Array of commands
+ * @return {Promise<string[][]>} Array of commands
  */
 export const retrieveCommands = async (): Promise<string[][]> => {
     return fetch("commands.txt")
@@ -41,6 +41,7 @@ export const executeCommands = (commands: string[][]) => {
     let hasPacMoved = false;
 
     for (const command of commands) {
+        // ensures Pacman has to be placed before listening to commands
         if (!hasPacMoved && command[0].toUpperCase() !== COMMAND_TYPES.PLACE) {
             continue;
         }
@@ -57,11 +58,13 @@ export const executeCommands = (commands: string[][]) => {
                 }
                 break;
             case COMMAND_TYPES.MOVE:
-                //move util
+                pacPosition =
+                    pacPosition !== undefined
+                        ? movePac(pacPosition)
+                        : pacPosition;
                 break;
             case COMMAND_TYPES.LEFT:
             case COMMAND_TYPES.RIGHT:
-                //rotate
                 if (pacPosition?.direction !== undefined) {
                     const newDirection = rotatePac(
                         command[0],
@@ -129,6 +132,42 @@ const placePac = (command: string[]): IPacPosition | undefined => {
         : undefined;
 };
 
+/**
+ * move Pacman forward
+ * @param {IPacPosition} currentPosition The position of Pacman
+ * @return {IPacPosition} new position of Pacman
+ */
+const movePac = (currentPosition: IPacPosition): IPacPosition => {
+    let isValidPos = true;
+    let newPosition = currentPosition;
+
+    if (currentPosition.direction === 0) {
+        newPosition.yPos += 1;
+    } else if (currentPosition.direction === 90) {
+        newPosition.xPos += 1;
+    } else if (currentPosition.direction === 180) {
+        newPosition.yPos -= 1;
+    } else if (currentPosition.direction === 270) {
+        newPosition.xPos -= 1;
+    }
+
+    // check if Pacman is still within the grid
+    if (newPosition.xPos < 0 || newPosition.xPos > 5) {
+        isValidPos = false;
+    }
+    if (newPosition.yPos < 0 || newPosition.yPos > 5) {
+        isValidPos = false;
+    }
+
+    return isValidPos ? newPosition : currentPosition;
+};
+
+/**
+ * rotates Pacman's direction
+ * @param {string} rotationCommand The rotation command (right or left)
+ * @param {number} currentDirection The current direction Pacman is facing
+ * @return {number} new direction of Pacman
+ */
 const rotatePac = (
     rotationCommand: string,
     currentDirection: number
