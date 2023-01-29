@@ -18,11 +18,15 @@ interface IPacPosition {
 }
 
 enum COMMAND_TYPES {
-  PLACE = 'place',
-  MOVE = 'move',
-  LEFT = 'left',
-  RIGHT = 'right', 
-  REPORT = 'report'
+  PLACE = 'PLACE',
+  MOVE = 'MOVE',
+  LEFT = 'LEFT',
+  RIGHT = 'RIGHT', 
+  REPORT = 'REPORT'
+}
+
+const getKeyByValue = (object: { [x: string]: number; }, value: number) => {
+  return Object.keys(object).find(key => object[key] === value);
 }
 
 /**
@@ -34,10 +38,10 @@ export const executeCommands = (commands: string[][]) => {
   let hasPacMoved = false
 
   for (const command of commands) {
-    if (!hasPacMoved && command[0] !== COMMAND_TYPES.PLACE) {
+    if (!hasPacMoved && command[0].toUpperCase() !== COMMAND_TYPES.PLACE) {
       continue;
     }
-    switch(command[0].toLowerCase()) {
+    switch(command[0].toUpperCase()) {
       case COMMAND_TYPES.PLACE:
           //place util
           if (command.length > 1) {
@@ -57,7 +61,9 @@ export const executeCommands = (commands: string[][]) => {
         //rotate
         break;
       case COMMAND_TYPES.REPORT:
-        alert('NORTH 23 2 1')
+        if (pacPosition !== undefined) {
+          alert(`${pacPosition.xPos},${pacPosition.yPos},${getKeyByValue(DirectionDegrees, pacPosition.direction)}`)
+        }
     }
   }
 }
@@ -89,7 +95,7 @@ const placePac = (command: string[]): IPacPosition | undefined => {
 
   const convertDirToDegree = (direction: string): number | undefined => {
     if (['NORTH', 'SOUTH', 'EAST', 'WEST'].includes(command[2])) {
-      return DirectionDegrees[command[2]]
+      return DirectionDegrees[command[2].toUpperCase()]
     }
     isValidPos = false
     return undefined

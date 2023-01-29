@@ -10,7 +10,7 @@ const GridInterpreter = (): JSX.Element => {
     const interpret = useCallback(() => {
         setLoading(true)
         retrieveCommands().then((commands) => {
-            // executeCommands(commands)
+            executeCommands(commands)
         }).then(() => setLoading(false))
 
     }, [])
