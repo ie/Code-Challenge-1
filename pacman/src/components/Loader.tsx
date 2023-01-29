@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Loader = (): JSX.Element => {
-    return <div>Interpretting</div>
-}
+    return <div>Interpretting</div>;
+};
 
-export default Loader
+export default Loader;
