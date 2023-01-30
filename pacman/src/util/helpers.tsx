@@ -35,8 +35,9 @@ const getKeyByValue = (object: { [x: string]: number }, value: number) => {
 /**
  * breaks down and executes commands line by line
  * @param {string[][]} commands The array of string array commands
+ * @return {string} The position of Pacman after commands
  */
-export const executeCommands = (commands: string[][]) => {
+export const executeCommands = (commands: string[][]): string => {
     let pacPosition: IPacPosition | undefined;
     let hasPacMoved = false;
 
@@ -75,17 +76,16 @@ export const executeCommands = (commands: string[][]) => {
                 break;
             case COMMAND_TYPES.REPORT:
                 if (pacPosition !== undefined) {
-                    alert(
-                        `${pacPosition.xPos},${
-                            pacPosition.yPos
-                        },${getKeyByValue(
-                            DirectionDegrees,
-                            pacPosition.direction
-                        )}`
-                    );
+                    return `${pacPosition.xPos},${
+                        pacPosition.yPos
+                    },${getKeyByValue(
+                        DirectionDegrees,
+                        pacPosition.direction
+                    )}`;
                 }
         }
     }
+    return "INVALID COMMAND";
 };
 
 const DirectionDegrees: Record<string, number> = {

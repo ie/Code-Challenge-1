@@ -6,12 +6,13 @@ import { retrieveCommands, executeCommands } from "../util/helpers";
 
 const GridInterpreter = (): JSX.Element => {
     const [loading, setLoading] = useState<boolean>(false);
+    const [report, setReport] = useState<string>("");
 
     const interpret = useCallback(() => {
         setLoading(true);
         retrieveCommands()
             .then((commands) => {
-                executeCommands(commands);
+                setReport(executeCommands(commands));
             })
             .then(() => setLoading(false));
     }, []);
@@ -25,6 +26,7 @@ const GridInterpreter = (): JSX.Element => {
                     Interpret
                 </button>
             )}
+            <div>{report}</div>
         </div>
     );
 };
