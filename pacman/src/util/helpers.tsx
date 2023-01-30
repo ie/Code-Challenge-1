@@ -138,28 +138,43 @@ const placePac = (command: string[]): IPacPosition | undefined => {
  * @return {IPacPosition} new position of Pacman
  */
 const movePac = (currentPosition: IPacPosition): IPacPosition => {
-    let isValidPos = true;
-    let newPosition = currentPosition;
-
-    if (currentPosition.direction === 0) {
-        newPosition.yPos += 1;
-    } else if (currentPosition.direction === 90) {
-        newPosition.xPos += 1;
-    } else if (currentPosition.direction === 180) {
-        newPosition.yPos -= 1;
-    } else if (currentPosition.direction === 270) {
-        newPosition.xPos -= 1;
-    }
-
     // check if Pacman is still within the grid
-    if (newPosition.xPos < 0 || newPosition.xPos > 5) {
-        isValidPos = false;
-    }
-    if (newPosition.yPos < 0 || newPosition.yPos > 5) {
-        isValidPos = false;
+    const isPacSafeX = (xPos: number): boolean => {
+        if (xPos < 0 || xPos > 5) {
+            return false;
+        }
+        return true;
+    };
+    const isPacSafeY = (yPos: number): boolean => {
+        if (yPos < 0 || yPos > 5) {
+            return false;
+        }
+        return true;
+    };
+
+    if (
+        currentPosition.direction === 0 &&
+        isPacSafeY(currentPosition.yPos + 1)
+    ) {
+        currentPosition.yPos += 1;
+    } else if (
+        currentPosition.direction === 90 &&
+        isPacSafeX(currentPosition.xPos + 1)
+    ) {
+        currentPosition.xPos += 1;
+    } else if (
+        currentPosition.direction === 180 &&
+        isPacSafeY(currentPosition.yPos - 1)
+    ) {
+        currentPosition.yPos -= 1;
+    } else if (
+        currentPosition.direction === 270 &&
+        isPacSafeX(currentPosition.xPos - 1)
+    ) {
+        currentPosition.xPos -= 1;
     }
 
-    return isValidPos ? newPosition : currentPosition;
+    return currentPosition;
 };
 
 /**
